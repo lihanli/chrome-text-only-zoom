@@ -12,7 +12,8 @@
     }
   ],
   "browser_action": {
-    "name": "Text Only Zoom"
+    "name": "Text Only Zoom",
+    "default_popup": "lib/popup.html"
   },
   "manifest_version": 2
 }

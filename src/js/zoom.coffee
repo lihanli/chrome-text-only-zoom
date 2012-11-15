@@ -78,14 +78,13 @@ getFromLocalStorage = (key) ->
 putInLocalStorage = (key, value) ->
   localStorage[key] = JSON.stringify(value)
 
-$ ->
-  Mousetrap.bind 'alt+shift+=', ->
-    changeFont 0.1
-  Mousetrap.bind 'alt+shift+-', ->
-    changeFont -0.1
-  Mousetrap.bind 'alt+shift+0', ->
-    totalRatio = 1
-    changeFont 0
+Mousetrap.bind 'alt+shift+=', ->
+  changeFont 0.1
+Mousetrap.bind 'alt+shift+-', ->
+  changeFont -0.1
+Mousetrap.bind 'alt+shift+0', ->
+  totalRatio = 1
+  changeFont 0
 
-  zoomLevel = getFromLocalStorage(ZOOM_LEVEL_KEY)
-  changeFont(zoomLevel, false) if zoomLevel
+zoomLevel = getFromLocalStorage(ZOOM_LEVEL_KEY)
+changeFont(zoomLevel, false) if zoomLevel
