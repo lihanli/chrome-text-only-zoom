@@ -1,9 +1,10 @@
 SCRIPT_FILE = "lib/zoom.js"
 
 task :build do
-  `cat src/js/*.js | uglifyjs > #{SCRIPT_FILE}`
+  `cat src/js/jquery.js | uglifyjs > #{SCRIPT_FILE}`
+  `cat src/js/gritter.js | uglifyjs >> #{SCRIPT_FILE}`
+  `cat src/js/mousetrap.js | uglifyjs >> #{SCRIPT_FILE}`
   `coffee -p -c src | uglifyjs >> #{SCRIPT_FILE}`
-  #`stylus -c < src/css/spinner_helper.styl > #{CSS_FILE}`
   puts 'compile done'
 end
 
