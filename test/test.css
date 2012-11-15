@@ -1,8 +1,11 @@
-div {
+div,input {
 	font-size: 10px;
 	line-height: 10px;
+	transition: width 2s;
+	-moz-transition: width 2s;
+	-webkit-transition: width 2s;
+	-o-transition: width 2s;
 }
-.large_font {
-	font-size: 12px;
+.large_lh {
 	line-height: 12px;
 }

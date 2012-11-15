@@ -26,7 +26,7 @@ end
 class TestZoom < CapybaraTestCase
   def setup
     super
-    @all_elements = %w(#div1 #div2 #div3 span input)
+    @all_elements = %w(#div1 #div2 #div3 input)
     @test_url     = "file://#{Dir.pwd}/test/test.html"
   end
 
@@ -37,14 +37,19 @@ class TestZoom < CapybaraTestCase
 
   def verify_font_size(size, notification = true)
     @all_elements.each do |element|
-      assert_equal "#{size}px", get_js("$('#{element}').css('font-size')")
-      if element =~ /span|input/
+      assert_equal "#{size}px", get_js("$('#{element}').css('font-size')"), element
+      if element.include?('input')
         assert_equal "12px", get_js("$('#{element}').css('line-height')")
       else
         assert_equal "#{size}px", get_js("$('#{element}').css('line-height')")
       end
+      assert find(element)[:style].include?('-webkit-transition: all 0ms ease 0ms')
     end
-    verify_no_style '#no_text'
+
+    %w(font-size line-height).each do |style|
+      assert "10px", get_js("$('#no_text').css('#{style}')")
+    end
+
     verify_gritter_text(notification ? "#{size * 10}%" : notification)
   end
 

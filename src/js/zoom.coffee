@@ -41,19 +41,24 @@ changeFont = (ratioDiff, notification = true) ->
     'line-height': ''
 
   if totalRatio == 1
+    relevantElements.css
+      '-webkit-transition': ''
+      'transition':         ''
     return putInLocalStorage(ZOOM_LEVEL_KEY, false)
 
   putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
+
+  # transitions screw up font size measuring
+  relevantElements.css
+    '-webkit-transition': 'all 0 ease 0'
+    'transition':         'all 0 ease 0'
 
   relevantElements.each ->
     element = $(@)
     return if element.text() == '' && !element.is('input, textarea')
 
-    if element.is('span,input')
-      # font-size not measured properly for some spans and inputs (bug in jquery?)
-      # don't change line-height for spans or inputs
-      element = element.parent()
-    else
+    unless element.is('input[type="text"]')
+      # changing line-height for inputs will make text disappear
       lineHeight = parseInt(element.css('line-height')) * totalRatio
 
     fontSize = parseInt(element.css('font-size')) * totalRatio
@@ -78,6 +83,9 @@ $ ->
     changeFont 0.1
   Mousetrap.bind 'alt+shift+-', ->
     changeFont -0.1
+  Mousetrap.bind 'alt+shift+0', ->
+    totalRatio = 1
+    changeFont 0
 
   zoomLevel = getFromLocalStorage(ZOOM_LEVEL_KEY)
   changeFont(zoomLevel, false) if zoomLevel
