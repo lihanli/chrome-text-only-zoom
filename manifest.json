@@ -1,0 +1,17 @@
+{
+  "name": "Text Only Zoom",
+  "version": "1.0",
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["lib/zoom.js"]
+    }
+  ],
+  "browser_action": {
+    "name": "Text Only Zoom"
+  },
+  "manifest_version": 2
+}
