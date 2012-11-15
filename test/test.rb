@@ -35,7 +35,7 @@ class TestZoom < CapybaraTestCase
     page.execute_script("Mousetrap.trigger('alt+shift+#{key}')")
   end
 
-  def verify_font_size(size)
+  def verify_font_size(size, notification = true)
     @all_elements.each do |element|
       assert_equal "#{size}px", get_js("$('#{element}').css('font-size')")
       if element =~ /span|input/
@@ -45,6 +45,7 @@ class TestZoom < CapybaraTestCase
       end
     end
     verify_no_style '#no_text'
+    verify_gritter_text(notification ? "#{size * 10}%" : notification)
   end
 
   def verify_no_style(selector)
@@ -52,10 +53,19 @@ class TestZoom < CapybaraTestCase
     assert (style == '') || (style == nil)
   end
 
-  def verify_all_no_style
+  def verify_gritter_text(text)
+    if text
+      assert all('.gritter-without-image p').last.text.include?(text)
+    else
+      assert_equal false, page.has_css?('.gritter-item')
+    end
+  end
+
+  def verify_all_no_style(notification = true)
     @all_elements.each do |element|
       verify_no_style element
     end
+    verify_gritter_text(notification ? '100%' : notification)
   end
 
   def test_zoom
@@ -68,7 +78,7 @@ class TestZoom < CapybaraTestCase
 
     visit @test_url
     # make sure font increase is saved
-    verify_font_size 12
+    verify_font_size 12, false
 
     change_font false
     verify_font_size 11
@@ -76,7 +86,7 @@ class TestZoom < CapybaraTestCase
     verify_all_no_style
 
     visit @test_url
-    verify_all_no_style
+    verify_all_no_style false
 
     change_font false
     verify_font_size 9

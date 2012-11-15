@@ -7,6 +7,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
+      "css": ["lib/zoom.css"],
       "js": ["lib/zoom.js"]
     }
   ],

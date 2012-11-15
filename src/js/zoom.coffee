@@ -15,21 +15,31 @@ ignoredTags    = [
   'video'
   'canvas'
 ]
+$.extend $.gritter.options,
+  position: "bottom-left" # defaults to 'top-right' but can be 'bottom-left', 'bottom-right', 'top-left', 'top-right' (added in 1.7.1)
+  fade_in_speed: 0 # how fast notifications fade in (string or int)
+  fade_out_speed: 'fast' # how fast the notices fade out
+  time: 3000 # hang on the screen for...
 
 pixelValue = (value) ->
   "#{value}px"
 
-changeFont = (ratioDiff) ->
+changeFont = (ratioDiff, notification = true) ->
   changeFontSizeCalls = []
   totalRatio          += ratioDiff
   totalRatio          = Math.round(totalRatio * 100) / 100
   relevantElements    = $('*').not(ignoredTags.join())
-  # TODO pop up box
-  console.log totalRatio
+
+  if notification
+    $('.gritter-close').click()
+    $.gritter.add
+      title: "Text Zoom"
+      text: "Level #{(totalRatio * 100).toFixed()}%"
 
   relevantElements.css
     'font-size':   ''
     'line-height': ''
+
   if totalRatio == 1
     return putInLocalStorage(ZOOM_LEVEL_KEY, false)
 
@@ -70,4 +80,4 @@ $ ->
     changeFont -0.1
 
   zoomLevel = getFromLocalStorage(ZOOM_LEVEL_KEY)
-  changeFont(zoomLevel) if zoomLevel
+  changeFont(zoomLevel, false) if zoomLevel
