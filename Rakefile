@@ -1,10 +1,9 @@
 SCRIPT_FILE = "lib/zoom.js"
 
 task :build do
-  `cat src/js/jquery.js | uglifyjs > #{SCRIPT_FILE}`
-  `cat src/js/gritter.js | uglifyjs >> #{SCRIPT_FILE}`
-  `cat src/js/mousetrap.js | uglifyjs >> #{SCRIPT_FILE}`
-  `coffee -p -c src | uglifyjs >> #{SCRIPT_FILE}`
+  `cat src/js/jquery.js > #{SCRIPT_FILE}`
+  `cat src/js/libraries/*.js >> #{SCRIPT_FILE}`
+  `node_modules/.bin/coffee -p -c src >> #{SCRIPT_FILE}`
   puts 'compile done'
 end
 
