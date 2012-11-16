@@ -1,6 +1,6 @@
 {
-  "name": "Text Only Zoom",
-  "version": "1.0",
+  "name": "Zoom Text Only",
+  "version": "1.0.1",
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
   ],
@@ -12,7 +12,8 @@
     }
   ],
   "browser_action": {
-    "name": "Text Only Zoom",
+    "name": "Zoom Text Only",
+    "default_icon": "icon.png",
     "default_popup": "lib/popup.html"
   },
   "manifest_version": 2
