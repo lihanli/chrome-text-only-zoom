@@ -1,8 +1,8 @@
 {
   "name": "Zoom Text Only",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "permissions": [
-    "tabs", "http://*/*", "https://*/*"
+    "http://*/*", "https://*/*"
   ],
   "background": {
     "scripts": ["lib/util.js", "lib/background.js"]
