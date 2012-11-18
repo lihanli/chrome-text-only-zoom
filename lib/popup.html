@@ -7,14 +7,28 @@
     <div class='box'>
       <h3>Keyboard Shortcuts:</h3>
       <p>
-        Zoom in: Alt + Shift + =
+        <label>Zoom in:</label>
+        <input id='zoomInKeyInput' type='text' />
       </p>
       <p>
-        Zoom out: Alt + Shift + -
+        <label>Zoom out:</label>
+        <input id='zoomOutKeyInput' type='text' />
       </p>
       <p>
-        Reset Zoom: Alt + Shift + 0
+        <label>Reset zoom:</label>
+        <input id='zoomResetKeyInput' type='text' />
+      </p>
+      <div class='keysExplain'>
+        Special key names: shift, ctrl, alt, option, meta (windows key), command, backspace, tab, enter, return, capslock, esc, escape, space, pageup, pagedown, end, home, left, up, right, down, ins, and del.
+      </div>
+      <div id='noticeBox'></div>
+      <p>
+        <button id='saveButton'>Save</button>
+        <button id='resetButton'>Reset Defaults</button>
       </p>
     </div>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="util.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
   </body>
 </html>

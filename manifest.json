@@ -11,7 +11,7 @@
     {
       "matches": ["<all_urls>"],
       "css": ["lib/zoom.css"],
-      "js": ["lib/util.js", "lib/zoom.js"]
+      "js": ["lib/jquery.js", "lib/util.js", "lib/zoom.js"]
     }
   ],
   "browser_action": {

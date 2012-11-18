@@ -1,20 +1,16 @@
-var DEFAULTS;
-
-DEFAULTS = {};
-
-DEFAULTS[Util.ZOOM_IN_KEY] = 'alt+=';
-
-DEFAULTS[Util.ZOOM_OUT_KEY] = 'alt+-';
-
-DEFAULTS[Util.ZOOM_RESET_KEY] = 'alt+0';
-
+listeners = [];
 
 window.chrome = {
   extension: {
+  	onMessage: {
+  		addListener: function(listener) {
+  			listeners.push(listener);
+  		}
+  	},
     sendMessage: function(data, resCallBack) {
-      return resCallBack({
-        key: DEFAULTS[data.key]
-      });
+    	listeners[0](data, null, function (res) {
+    		return resCallBack(res);
+    	});
     }
   }
 };

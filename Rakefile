@@ -1,15 +1,11 @@
-CONTENT_SCRIPT = "lib/zoom.js"
-
 def compile_coffee(name, append = false)
   `node_modules/.bin/coffee -p -c src/js/#{name}.coffee #{append ? '>>' : '>'} lib/#{name}.js`
 end
 
 task :build do
-  `cat src/js/jquery.js > #{CONTENT_SCRIPT}`
-  `cat src/js/libraries/*.js >> #{CONTENT_SCRIPT}`
+  `cat src/js/libraries/*.js > lib/zoom.js`
   compile_coffee 'zoom', true
-  compile_coffee 'background'
-  compile_coffee 'util'
+  %w(background util popup).each { |f| compile_coffee f }
   puts 'compile done'
 end
 
@@ -23,5 +19,8 @@ task watch: [:build] do
 end
 
 task :test do
-  system "bundle exec ruby test/test.rb"
+  tests = Dir.entries('test/tests')
+  tests.delete '.'
+  tests.delete '..'
+  tests.each { |t| system "bundle exec ruby test/tests/#{t}" }
 end

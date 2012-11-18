@@ -1,7 +1,25 @@
 DEFAULTS = {}
-DEFAULTS[Util.ZOOM_IN_KEY]    = 'alt+='
-DEFAULTS[Util.ZOOM_OUT_KEY]   = 'alt+-'
-DEFAULTS[Util.ZOOM_RESET_KEY] = 'alt+0'
+DEFAULTS[Util.KEYS.ZOOM_IN_KEY]    = 'alt+='
+DEFAULTS[Util.KEYS.ZOOM_OUT_KEY]   = 'alt+-'
+DEFAULTS[Util.KEYS.ZOOM_RESET_KEY] = 'alt+0'
+
+class Settings
+  constructor: (@sendResponse) ->
+
+  resetDefaults: ->
+    for keyName, key of Util.KEYS
+      localStorage.removeItem key
+    Util.defaultResponse @sendResponse
+
+  key: (keyName) ->
+    @sendResponse key: Util.getFromLocalStorage(keyName) ? DEFAULTS[keyName]
+
+  saveKeys: (newKeys) ->
+    for k,v of newKeys
+      Util.putInLocalStorage k, v
+    Util.defaultResponse @sendResponse
 
 chrome.extension.onMessage.addListener (req, sender, sendResponse) ->
-  sendResponse key: Util.getFromLocalStorage(req.key) ? DEFAULTS[req.key]
+  settings = new Settings(sendResponse)
+  for k,v of req
+    settings[k] v

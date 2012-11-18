@@ -4,3 +4,10 @@
 body {
 	font-size: 18px;
 }
+.notice {
+	margin-top: 10px;
+	background-color: #A9F5BC;
+}
+.keysExplain {
+	font-size: 14px;
+}

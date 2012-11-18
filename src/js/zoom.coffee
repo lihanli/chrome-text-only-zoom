@@ -74,13 +74,13 @@ getKeyFromBackground = (keyName, keyFunction) ->
   chrome.extension.sendMessage key: keyName, (res) ->
     Mousetrap.bind res.key, keyFunction
 
-getKeyFromBackground Util.ZOOM_IN_KEY, ->
+getKeyFromBackground Util.KEYS.ZOOM_IN_KEY, ->
   changeFont 0.1
 
-getKeyFromBackground Util.ZOOM_OUT_KEY, ->
+getKeyFromBackground Util.KEYS.ZOOM_OUT_KEY, ->
   changeFont -0.1
 
-getKeyFromBackground Util.ZOOM_RESET_KEY, ->
+getKeyFromBackground Util.KEYS.ZOOM_RESET_KEY, ->
   totalRatio = 1
   changeFont 0
 
