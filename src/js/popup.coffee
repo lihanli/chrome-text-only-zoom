@@ -18,12 +18,12 @@ $ ->
     chrome.extension.sendMessage saveKeys: newKeys, (res) ->
       $('#noticeBox').append """
         <div class='notice'>
-          Settings have been saved
+          <i class="icon-ok"></i> Settings have been saved.
           <br />
-          Reload page to use new shortcuts
+          Reload page to use new shortcuts.
         </div>
       """
-      $('.notice').delay(3000).fadeOut 'slow', ->
+      $('.notice').delay(5000).fadeOut 'slow', ->
         $(@).remove()
 
   setKeysFromBg()

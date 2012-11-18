@@ -1,13 +1,28 @@
+.verticalSpacer15 {
+	padding-top: 15px;
+}
+
+.horizontalSpacer10 {
+	padding-right: 10px;
+}
+
+.marginBottom0 {
+	margin-bottom: 0px !important;
+}
+
+.tac {
+	text-align: center;
+}
+
 .box {
-	width: 250px;
+	width: 230px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
-body {
-	font-size: 18px;
-}
+
 .notice {
+	padding: 10px;
 	margin-top: 10px;
 	background-color: #A9F5BC;
-}
-.keysExplain {
-	font-size: 14px;
+	border-radius: 5px;
 }
