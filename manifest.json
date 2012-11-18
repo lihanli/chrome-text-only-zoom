@@ -4,11 +4,14 @@
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
   ],
+  "background": {
+    "scripts": ["lib/util.js", "lib/background.js"]
+  },
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*"],
+      "matches": ["<all_urls>"],
       "css": ["lib/zoom.css"],
-      "js": ["lib/zoom.js"]
+      "js": ["lib/util.js", "lib/zoom.js"]
     }
   ],
   "browser_action": {

@@ -1,9 +1,15 @@
-SCRIPT_FILE = "lib/zoom.js"
+CONTENT_SCRIPT = "lib/zoom.js"
+
+def compile_coffee(name, append = false)
+  `node_modules/.bin/coffee -p -c src/js/#{name}.coffee #{append ? '>>' : '>'} lib/#{name}.js`
+end
 
 task :build do
-  `cat src/js/jquery.js > #{SCRIPT_FILE}`
-  `cat src/js/libraries/*.js >> #{SCRIPT_FILE}`
-  `node_modules/.bin/coffee -p -c src >> #{SCRIPT_FILE}`
+  `cat src/js/jquery.js > #{CONTENT_SCRIPT}`
+  `cat src/js/libraries/*.js >> #{CONTENT_SCRIPT}`
+  compile_coffee 'zoom', true
+  compile_coffee 'background'
+  compile_coffee 'util'
   puts 'compile done'
 end
 

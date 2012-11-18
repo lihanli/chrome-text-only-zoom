@@ -44,9 +44,9 @@ changeFont = (ratioDiff, notification = true) ->
     relevantElements.css
       '-webkit-transition': ''
       'transition':         ''
-    return putInLocalStorage(ZOOM_LEVEL_KEY, false)
+    return Util.putInLocalStorage(ZOOM_LEVEL_KEY, false)
 
-  putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
+  Util.putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
 
   # transitions screw up font size measuring
   relevantElements.css
@@ -70,21 +70,19 @@ changeFont = (ratioDiff, notification = true) ->
   for call in changeFontSizeCalls
     call()
 
-getFromLocalStorage = (key) ->
-  value = localStorage[key]
-  return JSON.parse(value) if value
-  null
+getKeyFromBackground = (keyName, keyFunction) ->
+  chrome.extension.sendMessage key: keyName, (res) ->
+    Mousetrap.bind res.key, keyFunction
 
-putInLocalStorage = (key, value) ->
-  localStorage[key] = JSON.stringify(value)
-
-Mousetrap.bind 'alt+shift+=', ->
+getKeyFromBackground Util.ZOOM_IN_KEY, ->
   changeFont 0.1
-Mousetrap.bind 'alt+shift+-', ->
+
+getKeyFromBackground Util.ZOOM_OUT_KEY, ->
   changeFont -0.1
-Mousetrap.bind 'alt+shift+0', ->
+
+getKeyFromBackground Util.ZOOM_RESET_KEY, ->
   totalRatio = 1
   changeFont 0
 
-zoomLevel = getFromLocalStorage(ZOOM_LEVEL_KEY)
+zoomLevel = Util.getFromLocalStorage(ZOOM_LEVEL_KEY)
 changeFont(zoomLevel, false) if zoomLevel

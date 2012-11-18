@@ -32,7 +32,7 @@ class TestZoom < CapybaraTestCase
 
   def change_font(up = true)
     key = up ? '=' : '-'
-    page.execute_script("Mousetrap.trigger('alt+shift+#{key}')")
+    page.execute_script("Mousetrap.trigger('alt+#{key}')")
   end
 
   def verify_font_size(size, notification = true)
