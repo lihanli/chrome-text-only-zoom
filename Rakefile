@@ -11,16 +11,14 @@ end
 
 task watch: [:build] do
   require 'listen'
-
   Listen.to('src') do |modified, added, removed|
     Rake::Task["build"].execute
   end
-
 end
 
 task :test do
   tests = Dir.entries('test/tests')
   tests.delete '.'
   tests.delete '..'
-  tests.each { |t| system "bundle exec ruby test/tests/#{t}" }
+  tests.each { |t| require "./test/tests/#{t}" }
 end

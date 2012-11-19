@@ -55,7 +55,7 @@ changeFont = (ratioDiff, notification = true) ->
 
   relevantElements.each ->
     element = $(@)
-    return if element.text() == '' && !element.is('input, textarea')
+    return if $.trim(element.text()) == '' && !element.is('input, textarea')
 
     unless element.is('input[type="text"]')
       # changing line-height for inputs will make text disappear

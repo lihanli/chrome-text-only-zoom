@@ -22,9 +22,8 @@ class TestZoom < CapybaraTestCase
       end
       assert find(element)[:style].include?('-webkit-transition: all 0ms ease 0ms')
     end
-
     %w(font-size line-height).each do |style|
-      assert "10px", get_js("$('#no_text').css('#{style}')")
+      assert_equal "10px", get_js("$('#no_text').css('#{style}')")
     end
 
     verify_gritter_text(notification ? "#{size * 10}%" : notification)
