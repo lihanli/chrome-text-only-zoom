@@ -1,7 +1,7 @@
 require 'capybara'
-require 'minitest/autorun'
 require 'pry'
-require 'turn'
+begin; require 'turn/autorun'; rescue LoadError; end
+Turn.config.format = :dot
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
