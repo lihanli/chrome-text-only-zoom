@@ -1,6 +1,6 @@
-totalRatio     = 1
-ZOOM_LEVEL_KEY = 'zoomLevel'
-ignoredTags    = [
+totalRatio       = 1
+ZOOM_LEVEL_KEY   = 'zoomLevel'
+IGNORED_ELEMENTS = [
   'script'
   'noscript'
   'link'
@@ -11,6 +11,7 @@ ignoredTags    = [
   'video'
   'canvas'
   'style'
+  '#gritter-notice-wrapper'
 ]
 $.extend $.gritter.options,
   position: "bottom-left" # defaults to 'top-right' but can be 'bottom-left', 'bottom-right', 'top-left', 'top-right' (added in 1.7.1)
@@ -25,7 +26,7 @@ changeFont = (ratioDiff, notification = true) ->
   changeFontSizeCalls = []
   totalRatio          += ratioDiff
   totalRatio          = Math.round(totalRatio * 100) / 100
-  relevantElements    = $('body, body *').not(ignoredTags.join())
+  relevantElements    = $('body, body *').not(IGNORED_ELEMENTS.join())
 
   if notification
     $('.gritter-close').click()
