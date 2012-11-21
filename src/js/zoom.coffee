@@ -15,7 +15,7 @@ ignoredTags    = [
 $.extend $.gritter.options,
   position: "bottom-left" # defaults to 'top-right' but can be 'bottom-left', 'bottom-right', 'top-left', 'top-right' (added in 1.7.1)
   fade_in_speed: 0 # how fast notifications fade in (string or int)
-  fade_out_speed: 'fast' # how fast the notices fade out
+  fade_out_speed: 0 # how fast the notices fade out
   time: 3000 # hang on the screen for...
 
 pixelValue = (value) ->
