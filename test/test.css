@@ -1,4 +1,6 @@
-div,input {
+body,
+div,
+input {
 	font-size: 10px;
 	line-height: 10px;
 	transition: width 2s;

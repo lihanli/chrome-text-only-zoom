@@ -3,7 +3,7 @@ require './test/test_helper'
 class TestZoom < CapybaraTestCase
   def setup
     super
-    @all_elements = %w(#div1 #div2 #div3 input)
+    @all_elements = %w(#div1 #div2 #div3 input body)
     @test_url     = "file://#{Dir.pwd}/test/test.html"
   end
 
@@ -15,7 +15,7 @@ class TestZoom < CapybaraTestCase
   def verify_font_size(size, notification = true)
     @all_elements.each do |element|
       assert_equal "#{size}px", get_js("$('#{element}').css('font-size')"), element
-      if element.include?('input')
+      if element == 'input'
         assert_equal "12px", get_js("$('#{element}').css('line-height')")
       else
         assert_equal "#{size}px", get_js("$('#{element}').css('line-height')")
