@@ -51,8 +51,8 @@ class TestPopup < CapybaraTestCase
 
     # reset defaults
     find('#resetButton').click
-    @new_inputs.each do |k, v|
-      assert_equal defaults[k], get_value(k)
+    @new_inputs.each do |input_id, _|
+      assert_equal defaults[input_id], get_value(input_id)
     end
   end
 
