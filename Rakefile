@@ -17,8 +17,5 @@ task watch: [:build] do
 end
 
 task :test do
-  tests = Dir.entries('test/tests')
-  tests.delete '.'
-  tests.delete '..'
-  tests.each { |t| require "./test/tests/#{t}" }
+  Dir.glob('test/tests/**/*.rb').each { |t| require "./#{t}" }
 end
