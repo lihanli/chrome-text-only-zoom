@@ -23,6 +23,7 @@ pixelValue = (value) ->
   "#{value}px"
 
 changeFont = (ratioDiff, notification = true) ->
+  start = (new Date()).getTime()
   changeFontSizeCalls = []
   totalRatio          += ratioDiff
   totalRatio          = Math.round(totalRatio * 100) / 100
@@ -51,22 +52,25 @@ changeFont = (ratioDiff, notification = true) ->
     '-webkit-transition': 'all 0 ease 0'
     'transition':         'all 0 ease 0'
 
-  relevantElements.each ->
-    element = $(@)
-    return if $.trim(element.text()) == '' && !element.is('input, textarea')
-
-    unless element.is('input[type="text"]')
+  _.each relevantElements, (element) ->
+    # dont change font size or line-height if there's no text unless it's an input or textarea
+    return if Util.isBlank(element.innerText) && !(element.tagName == 'INPUT' || element.tagName == 'TEXTAREA')
+    #return if $.trim(jqElement.text()) == '' && !jqElement.is('input, textarea')
+    jqElement = $(element)
+    unless (element.tagName == 'INPUT') && (element.type == 'text')
       # changing line-height for inputs will make text disappear
-      lineHeight = parseInt(element.css('line-height')) * totalRatio
+      lineHeight = parseInt(getComputedStyle(element).lineHeight) * totalRatio
 
-    fontSize = parseInt(element.css('font-size')) * totalRatio
+    fontSize = parseInt(getComputedStyle(element).fontSize) * totalRatio
 
-    changeFontSizeCalls.push =>
-      $(@).css 'font-size', pixelValue(fontSize)
-      $(@).css('line-height', pixelValue(lineHeight)) if lineHeight?
+    changeFontSizeCalls.push ->
+      jqElement.css 'font-size', pixelValue(fontSize)
+      jqElement.css('line-height', pixelValue(lineHeight)) if lineHeight?
 
   for call in changeFontSizeCalls
     call()
+
+  console.log (new Date()).getTime() - start
 
 getKeyFromBackground = (keyName, keyFunction) ->
   chrome.extension.sendMessage key: keyName, (res) ->

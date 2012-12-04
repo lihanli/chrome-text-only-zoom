@@ -15,5 +15,8 @@ Util =
   defaultResponse: (sendResponse) ->
     sendResponse OK: true
 
+  isBlank: (str) ->
+    !str || /^\s*$/.test(str)
+
 root = exports ? window
 root.Util = Util
