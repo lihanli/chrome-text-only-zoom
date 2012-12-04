@@ -23,7 +23,7 @@ pixelValue = (value) ->
   "#{value}px"
 
 changeFont = (ratioDiff, notification = true) ->
-  start = (new Date()).getTime()
+  #start = (new Date()).getTime() # uncomment to benchmark
   changeFontSizeCalls = []
   totalRatio          += ratioDiff
   totalRatio          = Math.round(totalRatio * 100) / 100
@@ -40,23 +40,18 @@ changeFont = (ratioDiff, notification = true) ->
     'line-height': ''
 
   if totalRatio == 1
-    relevantElements.css
-      '-webkit-transition': ''
-      'transition':         ''
+    relevantElements.removeClass 'noTransition'
     return Util.putInLocalStorage(ZOOM_LEVEL_KEY, false)
 
   Util.putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
 
   # transitions screw up font size measuring
-  relevantElements.css
-    '-webkit-transition': 'all 0 ease 0'
-    'transition':         'all 0 ease 0'
+  relevantElements.addClass 'noTransition'
 
   _.each relevantElements, (element) ->
     # dont change font size or line-height if there's no text unless it's an input or textarea
-    return if Util.isBlank(element.innerText) && !(element.tagName == 'INPUT' || element.tagName == 'TEXTAREA')
-    #return if $.trim(jqElement.text()) == '' && !jqElement.is('input, textarea')
-    jqElement = $(element)
+    return if Util.isBlank(element.innerText) && !(element.tagName.match /INPUT|TEXTAREA/)
+
     unless (element.tagName == 'INPUT') && (element.type == 'text')
       # changing line-height for inputs will make text disappear
       lineHeight = parseInt(getComputedStyle(element).lineHeight) * totalRatio
@@ -64,13 +59,14 @@ changeFont = (ratioDiff, notification = true) ->
     fontSize = parseInt(getComputedStyle(element).fontSize) * totalRatio
 
     changeFontSizeCalls.push ->
+      jqElement = $(element)
       jqElement.css 'font-size', pixelValue(fontSize)
       jqElement.css('line-height', pixelValue(lineHeight)) if lineHeight?
 
   for call in changeFontSizeCalls
     call()
 
-  console.log (new Date()).getTime() - start
+  #console.log (new Date()).getTime() - start # uncomment to benchmark
 
 getKeyFromBackground = (keyName, keyFunction) ->
   chrome.extension.sendMessage key: keyName, (res) ->

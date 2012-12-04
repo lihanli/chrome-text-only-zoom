@@ -1,3 +1,9 @@
+.noTransition {
+	-webkit-transition: all 0 ease 0 !important;
+}
+
+/* gritter */
+
 /* the norm */
 #gritter-notice-wrapper {
 	position:fixed;

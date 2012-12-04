@@ -17,8 +17,12 @@ class CapybaraTestCase < MiniTest::Unit::TestCase
     page.execute_script("return #{code}")
   end
 
-  def get_value(jquery_selector)
-    get_js "$('#{jquery_selector}').val()"
+  def get_value(selector)
+    get_js "$('#{selector}').val()"
+  end
+
+  def has_class(selector, class_name)
+    get_js "$('#{selector}').hasClass('#{class_name}')"
   end
 
   def teardown
