@@ -1,4 +1,4 @@
-require './test/test_helper'
+require 'test_helper'
 
 # create popup_test.html with injected scripts
 POPUP_TEST_HTML   = 'lib/popup_test.html'
