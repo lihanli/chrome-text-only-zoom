@@ -63,10 +63,8 @@ changeFont = (ratioDiff, notification = true) ->
       jqElement.css 'font-size', pixelValue(fontSize)
       jqElement.css('line-height', pixelValue(lineHeight)) if lineHeight?
 
-  timeout = 0
   for call in changeFontSizeCalls
-    setTimeout call, timeout
-    timeout += 1
+    call()
 
   #console.log (new Date()).getTime() - start # uncomment to benchmark
 
