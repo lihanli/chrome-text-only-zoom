@@ -27,7 +27,7 @@ changeFont = (ratioDiff, notification = true) ->
   changeFontSizeCalls = []
   totalRatio          += ratioDiff
   totalRatio          = Math.round(totalRatio * 100) / 100
-  relevantElements    = $('body, body *').not(IGNORED_ELEMENTS.join())
+  relevantElements    = $('body, body *')
 
   if notification
     $('.gritter-close').click()
