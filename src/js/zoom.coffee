@@ -39,13 +39,11 @@ changeFont = (ratioDiff, notification = true) ->
 
   _.each relevantElements, (element) ->
     tagName = element.tagName
-    # dont change font size or line-height if there's no text unless it's an input or textarea
-    return if Util.isBlank(element.innerText) && !(tagName.match /INPUT|TEXTAREA/)
     return if tagName.match(ignore)
 
-    unless (tagName == 'INPUT') && (element.type == 'text')
-      # changing line-height for inputs will make text disappear
-      lineHeight = parseInt(getComputedStyle(element).lineHeight) * totalRatio
+    if !Util.isBlank(element.innerText) || (tagName == 'TEXTAREA')
+      currentLh  = getComputedStyle(element).lineHeight
+      lineHeight = parseInt(currentLh) * totalRatio if currentLh.indexOf('px') != -1
 
     fontSize = parseInt(getComputedStyle(element).fontSize) * totalRatio
 
