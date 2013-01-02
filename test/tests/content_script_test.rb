@@ -22,9 +22,7 @@ class TestZoom < CapybaraTestCase
       end
       assert has_class(element, 'noTransition')
     end
-    %w(font-size line-height).each do |style|
-      assert_equal "10px", get_js("$('#no_text').css('#{style}')")
-    end
+    assert_equal '10px', get_js("$('#no_text').css('line-height')")
 
     verify_gritter_text(notification ? "#{size * 10}%" : notification)
   end

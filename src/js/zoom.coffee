@@ -12,7 +12,7 @@ pixelValue = (value) ->
   "#{value}px"
 
 changeFont = (ratioDiff, notification = true) ->
-  start = (new Date()).getTime() # uncomment to benchmark
+  #start = (new Date()).getTime() # uncomment to benchmark
   changeFontSizeCalls = []
   totalRatio          += ratioDiff
   totalRatio          = Math.round(totalRatio * 100) / 100
@@ -55,7 +55,7 @@ changeFont = (ratioDiff, notification = true) ->
   for call in changeFontSizeCalls
     call()
 
-  console.log (new Date()).getTime() - start # uncomment to benchmark
+  #console.log (new Date()).getTime() - start # uncomment to benchmark
 
 getKeyFromBackground = (keyName, keyFunction) ->
   chrome.extension.sendMessage key: keyName, (res) ->
