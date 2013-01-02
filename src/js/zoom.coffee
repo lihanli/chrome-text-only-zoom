@@ -1,18 +1,7 @@
-totalRatio       = 1
-ZOOM_LEVEL_KEY   = 'zoomLevel'
-IGNORED_ELEMENTS = [
-  'script'
-  'noscript'
-  'link'
-  'br'
-  'embed'
-  'iframe'
-  'img'
-  'video'
-  'canvas'
-  'style'
-  '#gritter-notice-wrapper'
-]
+totalRatio     = 1
+ZOOM_LEVEL_KEY = 'zoomLevel'
+ignore         = /SCRIPT|NOSCRIPT|LINK|BR|EMBED|IFRAME|IMG|VIDEO|CANVAS|STYLE/
+
 $.extend $.gritter.options,
   position: "bottom-left" # defaults to 'top-right' but can be 'bottom-left', 'bottom-right', 'top-left', 'top-right' (added in 1.7.1)
   fade_in_speed: 0 # how fast notifications fade in (string or int)
@@ -23,7 +12,7 @@ pixelValue = (value) ->
   "#{value}px"
 
 changeFont = (ratioDiff, notification = true) ->
-  #start = (new Date()).getTime() # uncomment to benchmark
+  start = (new Date()).getTime() # uncomment to benchmark
   changeFontSizeCalls = []
   totalRatio          += ratioDiff
   totalRatio          = Math.round(totalRatio * 100) / 100
@@ -49,10 +38,12 @@ changeFont = (ratioDiff, notification = true) ->
   relevantElements.addClass 'noTransition'
 
   _.each relevantElements, (element) ->
+    tagName = element.tagName
     # dont change font size or line-height if there's no text unless it's an input or textarea
-    return if Util.isBlank(element.innerText) && !(element.tagName.match /INPUT|TEXTAREA/)
+    return if Util.isBlank(element.innerText) && !(tagName.match /INPUT|TEXTAREA/)
+    return if tagName.match(ignore)
 
-    unless (element.tagName == 'INPUT') && (element.type == 'text')
+    unless (tagName == 'INPUT') && (element.type == 'text')
       # changing line-height for inputs will make text disappear
       lineHeight = parseInt(getComputedStyle(element).lineHeight) * totalRatio
 
@@ -66,7 +57,7 @@ changeFont = (ratioDiff, notification = true) ->
   for call in changeFontSizeCalls
     call()
 
-  #console.log (new Date()).getTime() - start # uncomment to benchmark
+  console.log (new Date()).getTime() - start # uncomment to benchmark
 
 getKeyFromBackground = (keyName, keyFunction) ->
   chrome.extension.sendMessage key: keyName, (res) ->
