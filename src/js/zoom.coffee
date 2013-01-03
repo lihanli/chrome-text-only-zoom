@@ -8,11 +8,11 @@ $.extend $.gritter.options,
   fade_out_speed: 0 # how fast the notices fade out
   time: 3000 # hang on the screen for...
 
-pixelValue = (value) ->
-  "#{value}px"
+multiplyByRatio = (value) ->
+  (parseInt(value) * totalRatio).toFixed(2) + 'px'
 
 changeFont = (ratioDiff, notification = true) ->
-  #start = (new Date()).getTime() # uncomment to benchmark
+  start = (new Date()).getTime() # uncomment to benchmark
   changeFontSizeCalls = []
   totalRatio          += ratioDiff
   totalRatio          = Math.round(totalRatio * 100) / 100
@@ -43,19 +43,18 @@ changeFont = (ratioDiff, notification = true) ->
 
     if !Util.isBlank(element.innerText) || (tagName == 'TEXTAREA')
       currentLh  = getComputedStyle(element).lineHeight
-      lineHeight = parseInt(currentLh) * totalRatio if currentLh.indexOf('px') != -1
+      lineHeight = multiplyByRatio(currentLh) if currentLh.indexOf('px') != -1
 
-    fontSize = parseInt(getComputedStyle(element).fontSize) * totalRatio
+    fontSize = multiplyByRatio(getComputedStyle(element).fontSize)
 
     changeFontSizeCalls.push ->
-      jqElement = $(element)
-      jqElement.css 'font-size', pixelValue(fontSize)
-      jqElement.css('line-height', pixelValue(lineHeight)) if lineHeight?
+      element.style.fontSize   = fontSize
+      element.style.lineHeight = lineHeight if lineHeight?
 
   for call in changeFontSizeCalls
     call()
 
-  #console.log (new Date()).getTime() - start # uncomment to benchmark
+  console.log (new Date()).getTime() - start # uncomment to benchmark
 
 getKeyFromBackground = (keyName, keyFunction) ->
   chrome.extension.sendMessage key: keyName, (res) ->
