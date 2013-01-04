@@ -37,19 +37,21 @@ changeFont = (ratioDiff, notification = true) ->
   # transitions screw up font size measuring
   relevantElements.addClass 'noTransition'
 
-  _.each relevantElements, (element) ->
-    tagName = element.tagName
-    return if tagName.match(ignore)
+  for element in relevantElements
+    ((el) ->
+      tagName = el.tagName
+      return if tagName.match(ignore)
 
-    if !Util.isBlank(element.innerText) || (tagName == 'TEXTAREA')
-      currentLh  = getComputedStyle(element).lineHeight
-      lineHeight = multiplyByRatio(currentLh) if currentLh.indexOf('px') != -1
+      if !Util.isBlank(el.innerText) || (tagName == 'TEXTAREA')
+        currentLh  = getComputedStyle(el).lineHeight
+        lineHeight = multiplyByRatio(currentLh) if currentLh.indexOf('px') != -1
 
-    fontSize = multiplyByRatio(getComputedStyle(element).fontSize)
+      fontSize = multiplyByRatio(getComputedStyle(el).fontSize)
 
-    changeFontSizeCalls.push ->
-      element.style.fontSize   = fontSize
-      element.style.lineHeight = lineHeight if lineHeight?
+      changeFontSizeCalls.push ->
+        el.style.fontSize   = fontSize
+        el.style.lineHeight = lineHeight if lineHeight?
+    )(element)
 
   for call in changeFontSizeCalls
     call()
