@@ -8,14 +8,16 @@ $.extend $.gritter.options,
   fade_out_speed: 0 # how fast the notices fade out
   time: 3000 # hang on the screen for...
 
-multiplyByRatio = (value) ->
-  (parseInt(value) * totalRatio).toFixed(2) + 'px'
+multiplyByRatio = (value, multiplier) ->
+  (parseFloat(value) * multiplier) + 'px'
 
 changeFont = (ratioDiff, notification = true) ->
   start = (new Date()).getTime() # uncomment to benchmark
   changeFontSizeCalls = []
+  prevRatio           = totalRatio
   totalRatio          += ratioDiff
-  totalRatio          = Math.round(totalRatio * 100) / 100
+  totalRatio          = Math.round(totalRatio * 10) / 10
+  multiplier          = totalRatio / prevRatio
   relevantElements    = $('body, body *')
 
   if notification
@@ -24,18 +26,17 @@ changeFont = (ratioDiff, notification = true) ->
       title: "Text Zoom"
       text: "Level #{(totalRatio * 100).toFixed()}%"
 
-  relevantElements.css
-    'font-size':   ''
-    'line-height': ''
-
   if totalRatio == 1
+    relevantElements.css
+      'font-size':   ''
+      'line-height': ''
     relevantElements.removeClass 'noTransition'
     return Util.putInLocalStorage(ZOOM_LEVEL_KEY, false)
 
   Util.putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
 
   # transitions screw up font size measuring
-  relevantElements.addClass 'noTransition'
+  relevantElements.addClass('noTransition') if prevRatio == 1
 
   for element in relevantElements
     ((el) ->
@@ -44,9 +45,9 @@ changeFont = (ratioDiff, notification = true) ->
 
       if !Util.isBlank(el.innerText) || (tagName == 'TEXTAREA')
         currentLh  = getComputedStyle(el).lineHeight
-        lineHeight = multiplyByRatio(currentLh) if currentLh.indexOf('px') != -1
+        lineHeight = multiplyByRatio(currentLh, multiplier) if currentLh.indexOf('px') != -1
 
-      fontSize = multiplyByRatio(getComputedStyle(el).fontSize)
+      fontSize = multiplyByRatio(getComputedStyle(el).fontSize, multiplier)
 
       changeFontSizeCalls.push ->
         el.style.fontSize   = fontSize
