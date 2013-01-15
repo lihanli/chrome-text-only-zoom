@@ -29,7 +29,7 @@ class TestZoom < CapybaraTestCase
 
   def verify_no_style(selector)
     style = get_js("$('#{selector}').attr('style')")
-    assert (style == '') || (style == nil)
+    assert ['', nil, 'zoom: 1;'].include?(style)
     assert_equal false, has_class(selector, 'noTransition')
   end
 
