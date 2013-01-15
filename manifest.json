@@ -1,6 +1,6 @@
 {
   "name": "Zoom Text Only",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "permissions": [
     "http://*/*", "https://*/*"
   ],
