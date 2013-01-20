@@ -37,7 +37,7 @@ class TestPopup < CapybaraTestCase
     defaults = {}
     # fill in new inputs
     @new_inputs.each do |k, v|
-      defaults[k] = get_value(k)
+      defaults[k] = get_val(k)
       find(k).set v
     end
     find('#saveButton').click
@@ -46,13 +46,13 @@ class TestPopup < CapybaraTestCase
     # check to see if they're saved and properly sanitized
     visit @test_url
     @new_inputs.each do |k, v|
-      assert_equal v.downcase.strip, get_value(k)
+      assert_equal v.downcase.strip, get_val(k)
     end
 
     # reset defaults
     find('#resetButton').click
     @new_inputs.each do |input_id, _|
-      assert_equal defaults[input_id], get_value(input_id)
+      assert_equal defaults[input_id], get_val(input_id)
     end
   end
 
