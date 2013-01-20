@@ -1,4 +1,4 @@
-listeners = [];
+var listeners = [];
 
 window.chrome = {
   extension: {
