@@ -20,7 +20,7 @@ class TestZoom < CapybaraTestCase
       else
         assert_equal "#{size}px", get_js("$('#{element}').css('line-height')")
       end
-      assert has_class(element, 'noTransition')
+      assert has_class?(find(element), 'noTransition')
     end
     assert_equal '10px', get_js("$('#no_text').css('line-height')")
 
@@ -30,7 +30,7 @@ class TestZoom < CapybaraTestCase
   def verify_no_style(selector)
     style = get_js("$('#{selector}').attr('style')")
     assert ['', nil, 'zoom: 1;'].include?(style)
-    assert_equal false, has_class(selector, 'noTransition')
+    assert_equal false, has_class?(find(selector), 'noTransition')
   end
 
   def verify_gritter_text(text)

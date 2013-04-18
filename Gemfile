@@ -6,6 +6,6 @@ gem "minitest", "3.4.0"
 gem "turn", "0.9.6"
 gem "pry"
 gem "capybara", "2.0.2"
-gem 'wist', git: 'https://github.com/lihanli/wist'
+gem 'wist', '0.1.0'
 gem "rake", "~> 10.0.3"
 gem 'tconsole'
