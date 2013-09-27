@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "coffee-script":  "=1.4.0"
+    "coffee-script":  "=1.6.3"
   }
 }

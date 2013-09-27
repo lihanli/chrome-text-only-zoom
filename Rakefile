@@ -13,9 +13,12 @@ end
 
 task watch: [:build] do
   require 'listen'
+
   Listen.to('src') do |modified, added, removed|
     Rake::Task["build"].execute
   end
+
+  sleep 10 while true
 end
 
 Rake::TestTask.new('test') do |t|

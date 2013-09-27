@@ -18,7 +18,7 @@ $ ->
     chrome.extension.sendMessage saveKeys: newKeys, (res) ->
       $('#noticeBox').append """
         <div class='notice'>
-          <i class="icon-ok"></i> Settings have been saved.
+          <span class="glyphicon glyphicon-floppy-saved"></span> Settings have been saved.
           <br />
           Reload page to use new shortcuts.
         </div>
