@@ -18,6 +18,7 @@
     "jquery": "~2.0.3",
     "gritter": "latest",
     "mousetrap": "latest",
+    "underscore": "latest",
     "bootstrap": "~3.0.0"
   }
 }
