@@ -26,3 +26,7 @@
 	background-color: #A9F5BC;
 	border-radius: 5px;
 }
+
+.notice .glyphicon {
+  margin-right: 5px;
+}
