@@ -1,7 +1,5 @@
 require 'test_helper'
 
-
-
 class TestPopup < CapybaraTestCase
   def setup
     super
