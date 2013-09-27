@@ -6,17 +6,30 @@
   </head>
   <body>
     <div class='box'>
-      <h3 class='tac marginBottom0'>Zoom Text Only</h3>
+      <h2 class='tac'>Zoom Text Only</h2>
       <legend>Keyboard Shortcuts</legend>
-      <label>Zoom in:</label>
-      <input id='zoomInKeyInput' type='text' />
-      <label>Zoom out:</label>
-      <input id='zoomOutKeyInput' type='text' />
-      <label>Reset zoom:</label>
-      <input id='zoomResetKeyInput' type='text' />
-      <small>
-        Special key names: shift, ctrl, alt, option, meta (windows key), command, backspace, tab, enter, return, capslock, esc, escape, space, pageup, pagedown, end, home, left, up, right, down, ins, and del.
-      </small>
+
+      <div class="form-group">
+        <label for="zoomInKeyInput">Zoom in</label>
+        <input type="text" class="form-control" id="zoomInKeyInput" placeholder="Example: alt+shift+x">
+      </div>
+
+      <div class="form-group">
+        <label for="zoomOutKeyInput">Zoom out</label>
+        <input type="text" class="form-control" id="zoomOutKeyInput" placeholder="Example: alt+shift+x">
+      </div>
+
+      <div class="form-group">
+        <label for="zoomResetKeyInput">Reset zoom</label>
+        <input type="text" class="form-control" id="zoomResetKeyInput" placeholder="Example: alt+shift+x">
+      </div>
+
+      <div>
+        <small>
+          Special key names: shift, ctrl, alt, option, meta (windows key), command, backspace, tab, enter, return, capslock, esc, escape, space, pageup, pagedown, end, home, left, up, right, down, ins, and del.
+        </small>
+      </div>
+
       <div id='noticeBox'></div>
       <div class='verticalSpacer15'></div>
       <p class='tac'>
