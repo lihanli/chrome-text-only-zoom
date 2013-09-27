@@ -70,6 +70,5 @@ class TestZoom < CapybaraTestCase
 
     change_font false
     verify_font_size 9
-
   end
 end
