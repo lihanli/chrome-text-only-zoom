@@ -3,10 +3,26 @@ setKeysFromBg = ->
     chrome.extension.sendMessage key: key, (res) ->
       $("##{key}Input").val res.key
 
+addNotice = ->
+  $('.notice').remove()
+
+  message = $('<span>')
+  el = $('<div>').addClass('notice').html """
+    <br />
+    Reload page to use new shortcuts
+  """
+  el.prepend(message).appendTo($('#noticeBox'))
+
+  el.delay(5000).fadeOut 'slow', ->
+    el.remove()
+
+  message
+
 $ ->
   $('#resetButton').click ->
     chrome.extension.sendMessage resetDefaults: true, (res) ->
       setKeysFromBg()
+      addNotice().text('Shortcuts reset to defaults')
 
   $('#saveButton').click ->
     newKeys = {}
@@ -14,16 +30,9 @@ $ ->
       newKey = $.trim($("##{key}Input").val()).toLowerCase()
       newKeys[key] = newKey unless newKey == ''
 
-    $('.notice').remove()
     chrome.extension.sendMessage saveKeys: newKeys, (res) ->
-      $('#noticeBox').append """
-        <div class='notice'>
-          <span class="glyphicon glyphicon-floppy-saved"></span> Settings have been saved.
-          <br />
-          Reload page to use new shortcuts.
-        </div>
+      addNotice().html """
+        <span class="glyphicon glyphicon-floppy-saved"></span> Settings have been saved
       """
-      $('.notice').delay(5000).fadeOut 'slow', ->
-        $(@).remove()
 
   setKeysFromBg()
