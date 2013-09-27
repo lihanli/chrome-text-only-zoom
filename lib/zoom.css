@@ -1,5 +1,5 @@
 .noTransition {
-	-webkit-transition: all 0 ease 0 !important;
+  transition: all 0 ease 0 !important;
 }
 
 /* gritter */
