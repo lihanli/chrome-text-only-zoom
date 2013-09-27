@@ -5,8 +5,7 @@ def compile_coffee(name, append = false)
 end
 
 task :build do
-  `cat src/js/libraries/*.js > lib/zoom.js`
-  compile_coffee 'zoom', true
+  compile_coffee('zoom')
   %w(background util popup).each { |f| compile_coffee f }
   puts 'compile done'
 end

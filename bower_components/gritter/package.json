@@ -1,0 +1,54 @@
+{
+  "name": "Gritter",
+  "version": "1.7.6",
+  "description": "A small growl-like notification plugin for jQuery",
+  "homepage": "http://boedesign.com/blog/2009/07/11/growl-for-jquery-gritter/",
+  "keywords": [
+    "package",
+    "gritter",
+    "AngularJS", 
+    "Growl", 
+    "jQuery", 
+    "Notifications"
+  ],
+  "jam": {
+    "dependencies": {
+      "jquery": ">1.4.2"
+    },
+    "main": "js/jquery.gritter.js",
+    "shim": {
+      "deps": ["jquery"],
+      "exports": "Gritter"
+    }
+  },
+  "maintainers": [
+    {
+      "name": "Jason Feriante",      
+      "web": "http://lendio.com" 
+    } 
+  ],
+  "contributors": [
+    {
+      "name": "Jordan Boesch",      
+      "web": "http://boedesign.com" 
+    }, 
+    {
+      "name": "Jason Feriante",      
+      "web": "http://lendio.com" 
+    },
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "git", 
+      "url": "https://github.com/jferiante/Gritter"
+    }
+  ],
+  "github": "https://github.com/jferiante/Gritter",
+  "categories": ["UI", "AngularJS", "Growl", "jQuery", "Notifications"]
+}
