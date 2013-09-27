@@ -20,7 +20,7 @@ class TestZoom < CapybaraTestCase
       else
         assert_equal "#{size}px", get_js("$('#{element}').css('line-height')")
       end
-      assert has_class?(find(element), 'noTransition')
+      assert_equal('all 0s ease 0s', get_js("$('#{element}').css('transition')"))
     end
     assert_equal '10px', get_js("$('#no_text').css('line-height')")
 
