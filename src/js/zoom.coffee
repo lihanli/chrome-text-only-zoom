@@ -11,6 +11,9 @@ $.extend $.gritter.options,
 multiplyByRatio = (value, multiplier) ->
   (parseFloat(value) * multiplier) + 'px'
 
+addImportantStyle = (el, name, value) ->
+  el.style.cssText += "#{name}: #{value} !important;"
+
 changeFont = (ratioDiff, notification = true) ->
   #start = (new Date()).getTime() # uncomment to benchmark
   changeFontSizeCalls = []
@@ -50,8 +53,8 @@ changeFont = (ratioDiff, notification = true) ->
       fontSize = multiplyByRatio(getComputedStyle(el).fontSize, multiplier)
 
       changeFontSizeCalls.push ->
-        el.style.fontSize   = fontSize
-        el.style.lineHeight = lineHeight if lineHeight?
+        addImportantStyle(el, 'font-size', fontSize)
+        addImportantStyle(el, 'line-height', lineHeight) if lineHeight?
     )(element)
 
   for call in changeFontSizeCalls

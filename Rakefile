@@ -15,7 +15,7 @@ task watch: [:build] do
 
   Listen.to('src') do |modified, added, removed|
     Rake::Task["build"].execute
-  end
+  end.start
 
   sleep 10 while true
 end
