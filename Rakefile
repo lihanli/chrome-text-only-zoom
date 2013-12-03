@@ -24,3 +24,8 @@ Rake::TestTask.new('test') do |t|
   t.libs << "test"
   t.test_files = FileList['test/tests/**/*.rb']
 end
+
+task :dist do
+  system('rm build.zip')
+  system('zip -r build.zip . -x ./src/**\* ./.git/**\* ./test/**\* ./node_modules/**\*')
+end
