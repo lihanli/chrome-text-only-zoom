@@ -1,6 +1,7 @@
 {
   "name": "Zoom Text Only",
   "version": "1.1.1",
+  "description": "Zoom text without distorting the images",
   "permissions": [
     "http://*/*",
     "activeTab",
