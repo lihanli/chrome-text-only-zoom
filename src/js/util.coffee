@@ -18,5 +18,8 @@ Util =
   isBlank: (str) ->
     !str || /^\s*$/.test(str)
 
+  capitalize: (str) ->
+    str.charAt(0).toUpperCase() + str.slice(1)
+
 root = exports ? window
 root.Util = Util
