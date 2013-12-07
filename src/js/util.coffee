@@ -1,4 +1,4 @@
-Util =
+util =
   KEYS:
     ZOOM_IN_KEY:    'zoomInKey'
     ZOOM_OUT_KEY:   'zoomOutKey'
@@ -22,4 +22,4 @@ Util =
     str.charAt(0).toUpperCase() + str.slice(1)
 
 root = exports ? window
-root.Util = Util
+root.util = util

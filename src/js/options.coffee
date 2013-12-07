@@ -1,5 +1,5 @@
 setKeysFromBg = ->
-  _.each Util.KEYS, (key) ->
+  _.each util.KEYS, (key) ->
     chrome.extension.sendMessage key: key, (res) ->
       $("##{key}Input").val res.key
 
@@ -24,7 +24,7 @@ $ ->
 
   $('#saveButton').click ->
     newKeys = {}
-    for __, key of Util.KEYS
+    for __, key of util.KEYS
       newKey = $.trim($("##{key}Input").val()).toLowerCase()
       newKeys[key] = newKey unless newKey == ''
 

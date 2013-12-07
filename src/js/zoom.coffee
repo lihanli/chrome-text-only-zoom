@@ -34,9 +34,9 @@ changeFont = (ratioDiff, notification = true) ->
       'font-size':   ''
       'line-height': ''
     relevantElements.removeClass 'noTransition'
-    return Util.putInLocalStorage(ZOOM_LEVEL_KEY, false)
+    return util.putInLocalStorage(ZOOM_LEVEL_KEY, false)
 
-  Util.putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
+  util.putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
 
   # transitions screw up font size measuring
   relevantElements.addClass('noTransition') if prevRatio == 1
@@ -46,7 +46,7 @@ changeFont = (ratioDiff, notification = true) ->
       tagName = el.tagName
       return if tagName.match(ignore)
 
-      if !Util.isBlank(el.innerText) || (tagName == 'TEXTAREA')
+      if !util.isBlank(el.innerText) || (tagName == 'TEXTAREA')
         currentLh  = getComputedStyle(el).lineHeight
         lineHeight = multiplyByRatio(currentLh, multiplier) if currentLh.indexOf('px') != -1
 
@@ -66,15 +66,15 @@ getKeyFromBackground = (keyName, keyFunction) ->
   chrome.extension.sendMessage key: keyName, (res) ->
     Mousetrap.bind res.key, keyFunction
 
-getKeyFromBackground Util.KEYS.ZOOM_IN_KEY, ->
+getKeyFromBackground util.KEYS.ZOOM_IN_KEY, ->
   changeFont 0.1
 
-getKeyFromBackground Util.KEYS.ZOOM_OUT_KEY, ->
+getKeyFromBackground util.KEYS.ZOOM_OUT_KEY, ->
   changeFont -0.1
 
-getKeyFromBackground Util.KEYS.ZOOM_RESET_KEY, ->
+getKeyFromBackground util.KEYS.ZOOM_RESET_KEY, ->
   totalRatio = 1
   changeFont 0
 
-zoomLevel = Util.getFromLocalStorage(ZOOM_LEVEL_KEY)
+zoomLevel = util.getFromLocalStorage(ZOOM_LEVEL_KEY)
 changeFont(zoomLevel, false) if zoomLevel

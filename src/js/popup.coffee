@@ -9,7 +9,7 @@ dom =
 
 getCurrentZoomLevel = ->
   chrome.tabs.executeScript
-    code: "Util.getFromLocalStorage('zoomLevel');"
+    code: "util.getFromLocalStorage('zoomLevel');"
   , (data) ->
     if data?
       data = data[0] || 0
@@ -19,8 +19,8 @@ getCurrentZoomLevel = ->
       dom.errorMsgBox.removeClass('hidden')
 
 _.each ['in', 'out', 'reset'], (type) ->
-  dom["zoom#{Util.capitalize(type)}Button"].click ->
-    chrome.extension.sendMessage key: Util.KEYS["ZOOM_#{type.toUpperCase()}_KEY"], (res) ->
+  dom["zoom#{util.capitalize(type)}Button"].click ->
+    chrome.extension.sendMessage key: util.KEYS["ZOOM_#{type.toUpperCase()}_KEY"], (res) ->
       chrome.tabs.executeScript
         code: "Mousetrap.trigger('#{res.key}');"
       , ->
