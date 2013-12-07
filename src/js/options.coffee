@@ -1,5 +1,5 @@
 setKeysFromBg = ->
-  $.each Util.KEYS, (_, key) ->
+  _.each Util.KEYS, (key) ->
     chrome.extension.sendMessage key: key, (res) ->
       $("##{key}Input").val res.key
 
@@ -24,18 +24,12 @@ $ ->
 
   $('#saveButton').click ->
     newKeys = {}
-    for _, key of Util.KEYS
+    for __, key of Util.KEYS
       newKey = $.trim($("##{key}Input").val()).toLowerCase()
       newKeys[key] = newKey unless newKey == ''
 
     chrome.extension.sendMessage saveKeys: newKeys, (res) ->
       addNotice('Settings have been saved')
-
-  ['in', 'out', 'reset'].forEach (type) ->
-    $("#zoom#{Util.capitalize(type)}Button").click ->
-      chrome.extension.sendMessage key: Util.KEYS["ZOOM_#{type.toUpperCase()}_KEY"], (res) ->
-        chrome.tabs.executeScript
-          code: "Mousetrap.trigger('#{res.key}');"
 
   setKeysFromBg()
 
