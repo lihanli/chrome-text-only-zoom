@@ -2,14 +2,18 @@
   "name": "Zoom Text Only",
   "version": "1.1.1",
   "description": "Zoom text without distorting the images",
+  "options_page": "lib/options.html",
+
   "permissions": [
     "http://*/*",
     "activeTab",
     "https://*/*"
   ],
+
   "background": {
     "scripts": ["lib/util.js", "lib/background.js"]
   },
+
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -23,10 +27,12 @@
       ]
     }
   ],
+
   "browser_action": {
     "name": "Zoom Text Only",
     "default_icon": "icon.png",
     "default_popup": "lib/popup.html"
   },
+
   "manifest_version": 2
 }
