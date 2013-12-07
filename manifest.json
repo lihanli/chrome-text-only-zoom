@@ -6,8 +6,8 @@
 
   "permissions": [
     "http://*/*",
-    "activeTab",
-    "https://*/*"
+    "https://*/*",
+    "tabs"
   ],
 
   "background": {

@@ -3,6 +3,7 @@ dom =
   zoomOutButton: $('.zoomOutButton')
   zoomResetButton: $('.zoomResetButton')
   currentZoom: $('.currentZoom')
+  optionsLink: $('.optionsLink')
 
 getCurrentZoomLevel = ->
   chrome.tabs.executeScript
@@ -20,3 +21,18 @@ _.each ['in', 'out', 'reset'], (type) ->
         getCurrentZoomLevel()
 
 getCurrentZoomLevel()
+
+dom.optionsLink.click ->
+  optionsUrl = chrome.extension.getURL('lib/options.html')
+  chrome.tabs.query {}, (extensionTabs) ->
+    found = false
+    i = 0
+
+    while i < extensionTabs.length
+      if optionsUrl is extensionTabs[i].url
+        found = true
+        chrome.tabs.update extensionTabs[i].id,
+          selected: true
+
+      i++
+    chrome.tabs.create url: optionsUrl unless found
