@@ -9,15 +9,22 @@
       <h3 class='tac'>Zoom Text Only</h3>
       <div class='verticalSpacer15'></div>
 
-      <div class='currentZoomBox tac'>
-        <a class='btn btn-default zoomInButton'>+</a>
-        <span class='currentZoom'></span>
-        <a class='btn btn-default zoomOutButton'>-</a>
-      </div>
-      <div class='verticalSpacer15'></div>
+      <div class='zoomBox'>
+        <div class='currentZoomBox tac'>
+          <a class='btn btn-default zoomInButton'>+</a>
+          <span class='currentZoom'></span>
+          <a class='btn btn-default zoomOutButton'>-</a>
+        </div>
+        <div class='verticalSpacer15'></div>
 
-      <div class='tac'>
-        <a class='btn btn-default zoomResetButton'>Reset</a>
+        <div class='tac'>
+          <a class='btn btn-default zoomResetButton'>Reset</a>
+        </div>
+      </div>
+
+      <div class='errorMsgBox hidden'>
+        Can't zoom on this page
+        <div class='verticalSpacer15'></div>
       </div>
 
       <div class='pull-right'>

@@ -4,13 +4,19 @@ dom =
   zoomResetButton: $('.zoomResetButton')
   currentZoom: $('.currentZoom')
   optionsLink: $('.optionsLink')
+  zoomBox: $('.zoomBox')
+  errorMsgBox: $('.errorMsgBox')
 
 getCurrentZoomLevel = ->
   chrome.tabs.executeScript
     code: "Util.getFromLocalStorage('zoomLevel');"
   , (data) ->
-    data = data[0] || 0
-    dom.currentZoom.text("#{(Math.round(data * 10) * 10 + 100).toFixed()}%")
+    if data?
+      data = data[0] || 0
+      dom.currentZoom.text("#{(Math.round(data * 10) * 10 + 100).toFixed()}%")
+    else
+      dom.zoomBox.hide()
+      dom.errorMsgBox.removeClass('hidden')
 
 _.each ['in', 'out', 'reset'], (type) ->
   dom["zoom#{Util.capitalize(type)}Button"].click ->
