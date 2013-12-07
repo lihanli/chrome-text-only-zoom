@@ -24,6 +24,7 @@
    */
   $.fn.gritter.options = $.gritter.options = {
     position: '',
+    addPosition: 'bottom',
     class_name: '', // could be set to 'gritter-light' to use white notifications
     fade_in_speed: 'medium', // how fast notifications fade in
     fade_out_speed: 1000, // how fast the notices fade out
@@ -68,6 +69,7 @@
 
     // Public - options to over-ride with $.gritter.options in "add"
     position: '',
+    addPosition: '',
     fade_in_speed: '',
     fade_out_speed: '',
     time: '',
@@ -152,7 +154,11 @@
         return false;
       }
 
-      $('#gritter-notice-wrapper').addClass(position).append(tmp);
+      if (this.addPosition === 'top') {
+        $('#gritter-notice-wrapper').addClass(position).prepend(tmp);
+      } else {
+        $('#gritter-notice-wrapper').addClass(position).append(tmp);
+      }
 
       var item = $('#gritter-item-' + this._item_count);
 

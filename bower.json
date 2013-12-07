@@ -19,6 +19,6 @@
     "gritter": "latest",
     "mousetrap": "latest",
     "underscore": "latest",
-    "bootstrap": "~3.0.0"
+    "bootstrap": "3.0.3"
   }
 }

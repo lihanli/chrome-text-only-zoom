@@ -71,6 +71,10 @@ A small growl-like notification plugin for jQuery
 
 ## Change Log
 
+### Changes in 1.8.0 (October 22, 2013)
+
+* New option: `addPosition` - Ability to specify whether new notifications are added to the 'top' or to the 'bottom'.
+
 ### Changes in 1.7.6 (June 17, 2013)
 
 * Added options to always show the close button (hover_state = 'no'), and to customize the close button html (close_button = 'some html'. - Jason Feriante
