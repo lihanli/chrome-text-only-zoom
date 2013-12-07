@@ -7,7 +7,7 @@ class Settings
   constructor: (@sendResponse) ->
 
   resetDefaults: ->
-    for _, key of util.KEYS
+    for __, key of util.KEYS
       localStorage.removeItem key
     util.defaultResponse @sendResponse
 
