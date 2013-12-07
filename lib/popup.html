@@ -9,48 +9,18 @@
       <h2 class='tac'>Zoom Text Only</h2>
       <div class='verticalSpacer15'></div>
 
-      <div class="form-group">
-        <label for="zoomInKeyInput">
-          <button id="zoomInButton" class="btn btn-primary">
-            Zoom in
-          </button>
-        </label>
-
-        <input type="text" class="form-control" id="zoomInKeyInput" placeholder="Example: alt+shift+x">
+      <div class='currentZoomBox tac'>
+        <a class='btn btn-default zoomInButton'>+</a>
+        <span class='currentZoom'>100</span>
+        <a class='btn btn-default zoomOutButton'>-</a>
       </div>
-
-      <div class="form-group">
-        <label for="zoomOutKeyInput">
-          <button id="zoomOutButton" class="btn btn-primary">
-            Zoom out
-          </button>
-        </label>
-
-        <input type="text" class="form-control" id="zoomOutKeyInput" placeholder="Example: alt+shift+x">
-      </div>
-
-      <div class="form-group">
-        <label for="zoomResetKeyInput">
-          <button id="zoomResetButton" class="btn btn-primary">
-            Reset zoom
-          </button>
-        </label>
-        <input type="text" class="form-control" id="zoomResetKeyInput" placeholder="Example: alt+shift+x">
-      </div>
-
-      <div>
-        <small>
-          Special key names: shift, ctrl, alt, option, meta (windows key), command, backspace, tab, enter, return, capslock, esc, escape, space, pageup, pagedown, end, home, left, up, right, down, ins, and del.
-        </small>
-      </div>
-
-      <div id='noticeBox'></div>
       <div class='verticalSpacer15'></div>
-      <p class='tac'>
-        <button class='btn btn-primary' id='saveButton'>Save</button>
-        <span class='horizontalSpacer10'></span>
-        <button class='btn btn-primary' id='resetButton'>Reset Defaults</button>
-      </p>
+
+      <div class='tac'>
+        <a class='btn btn-default zoomResetButton'>Reset</a>
+      </div>
+
+      <div class='verticalSpacer25'></div>
     </div>
 
     <script src="../bower_components/jquery/jquery.js"></script>

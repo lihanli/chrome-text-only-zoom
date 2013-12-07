@@ -1,9 +1,9 @@
 .verticalSpacer15 {
-	padding-top: 15px;
+  padding-top: 15px;
 }
 
-.horizontalSpacer10 {
-	padding-right: 10px;
+.verticalSpacer25 {
+  padding-top: 25px;
 }
 
 .marginBottom0 {
@@ -20,13 +20,18 @@
 	margin-right: 20px;
 }
 
-.notice {
-	padding: 10px;
-	margin-top: 10px;
-	background-color: #A9F5BC;
-	border-radius: 5px;
+.currentZoom {
+  font-size: 24px;
+  margin-left: 5px;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
-.notice .glyphicon {
-  margin-right: 5px;
+.currentZoomBox {
+  height: 34px;
+  line-height: 34px;
+}
+
+.currentZoomBox .btn {
+  margin-top: -2px;
 }
