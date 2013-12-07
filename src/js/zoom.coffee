@@ -1,6 +1,6 @@
-totalRatio     = 1
+totalRatio = 1
 ZOOM_LEVEL_KEY = 'zoomLevel'
-ignore         = /SCRIPT|NOSCRIPT|LINK|BR|EMBED|IFRAME|IMG|VIDEO|CANVAS|STYLE/
+IGNORED_TAGS = /SCRIPT|NOSCRIPT|LINK|BR|EMBED|IFRAME|IMG|VIDEO|CANVAS|STYLE/
 
 $.extend $.gritter.options,
   position: "bottom-left" # defaults to 'top-right' but can be 'bottom-left', 'bottom-right', 'top-left', 'top-right' (added in 1.7.1)
@@ -44,7 +44,7 @@ changeFont = (ratioDiff, notification = true) ->
   for element in relevantElements
     ((el) ->
       tagName = el.tagName
-      return if tagName.match(ignore)
+      return if tagName.match(IGNORED_TAGS)
 
       if !util.isBlank(el.innerText) || (tagName == 'TEXTAREA')
         currentLh  = getComputedStyle(el).lineHeight
