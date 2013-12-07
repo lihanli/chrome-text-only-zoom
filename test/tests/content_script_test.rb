@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestZoom < CapybaraTestCase
+class ContentScriptTest < CapybaraTestCase
   def setup
     super
     @all_elements = %w(#div1 #div2 #div3 input body)

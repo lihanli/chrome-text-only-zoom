@@ -1,30 +1,30 @@
 require 'test_helper'
 
-class TestPopup < CapybaraTestCase
+class OptionsTest < CapybaraTestCase
   def setup
     super
-    # create popup_test.html with injected scripts
-    @popup_test_html   = 'lib/popup_test.html'
+    # create options_test.html with injected scripts
+    @options_test_html   = 'lib/options_test.html'
     new_file          = []
     scripts_to_inject = {
       "jquery.js" => "<script type=\"text/javascript\" src=\"../test/test.js\"></script>\n",
-      "popup.js"  => "<script type=\"text/javascript\" src=\"background.js\"></script>\n",
+      "options.js"  => "<script type=\"text/javascript\" src=\"background.js\"></script>\n",
     }
 
-    File.readlines('lib/popup.html').each do |line|
+    File.readlines('lib/options.html').each do |line|
       scripts_to_inject.each do |k, v|
         new_file << v if line.include?(k)
       end
       new_file << line
     end
 
-    File.open(@popup_test_html, 'w') do |f|
+    File.open(@options_test_html, 'w') do |f|
       new_file.each do |line|
         f.write line
       end
     end
 
-    @test_url = "file://#{Dir.pwd}/#{@popup_test_html}"
+    @test_url = "file://#{Dir.pwd}/#{@options_test_html}"
     @new_inputs = {
       '#zoomInKeyInput'    => 'ALT+shift+= ',
       '#zoomOutKeyInput'   => 'alt+shift+-',
@@ -32,7 +32,7 @@ class TestPopup < CapybaraTestCase
     }
   end
 
-  def test_popup
+  def test_options
     visit @test_url
     defaults = {}
     # fill in new inputs
@@ -57,7 +57,7 @@ class TestPopup < CapybaraTestCase
   end
 
   def teardown
-    File.delete(@popup_test_html)
+    File.delete(@options_test_html)
     super
   end
 end

@@ -2,18 +2,17 @@
 <html>
   <head>
     <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="popup.css" rel="stylesheet">
+    <link href="options.css" rel="stylesheet">
   </head>
   <body>
-    <div class='box'>
-      <h2 class='tac'>Zoom Text Only</h2>
+    <div class='container'>
+      <h2>Zoom Text Only</h2>
       <div class='verticalSpacer15'></div>
+      <legend>Keyboard Shortcuts</legend>
 
       <div class="form-group">
         <label for="zoomInKeyInput">
-          <button id="zoomInButton" class="btn btn-primary">
-            Zoom in
-          </button>
+          Zoom in
         </label>
 
         <input type="text" class="form-control" id="zoomInKeyInput" placeholder="Example: alt+shift+x">
@@ -21,9 +20,7 @@
 
       <div class="form-group">
         <label for="zoomOutKeyInput">
-          <button id="zoomOutButton" class="btn btn-primary">
-            Zoom out
-          </button>
+          Zoom out
         </label>
 
         <input type="text" class="form-control" id="zoomOutKeyInput" placeholder="Example: alt+shift+x">
@@ -31,9 +28,7 @@
 
       <div class="form-group">
         <label for="zoomResetKeyInput">
-          <button id="zoomResetButton" class="btn btn-primary">
-            Reset zoom
-          </button>
+          Reset zoom
         </label>
         <input type="text" class="form-control" id="zoomResetKeyInput" placeholder="Example: alt+shift+x">
       </div>
@@ -46,16 +41,15 @@
 
       <div id='noticeBox'></div>
       <div class='verticalSpacer15'></div>
-      <p class='tac'>
-        <button class='btn btn-primary' id='saveButton'>Save</button>
-        <span class='horizontalSpacer10'></span>
-        <button class='btn btn-primary' id='resetButton'>Reset Defaults</button>
-      </p>
+
+      <button class='btn btn-primary' id='saveButton'>Save</button>
+      <span class='horizontalSpacer10'></span>
+      <button class='btn btn-primary' id='resetButton'>Reset Defaults</button>
     </div>
 
     <script src="../bower_components/jquery/jquery.js"></script>
     <script src="../bower_components/underscore/underscore.js"></script>
     <script src="util.js"></script>
-    <script src="popup.js"></script>
+    <script src="options.js"></script>
   </body>
 </html>

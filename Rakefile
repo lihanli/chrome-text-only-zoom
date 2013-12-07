@@ -6,7 +6,7 @@ end
 
 task :build do
   compile_coffee('zoom')
-  %w(background util popup).each { |f| compile_coffee f }
+  %w(background util options).each { |f| compile_coffee f }
   puts 'compile done'
 end
 
