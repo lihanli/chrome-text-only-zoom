@@ -1,12 +1,11 @@
 require 'rake/testtask'
 
-def compile_coffee(name, append = false)
-  `node_modules/.bin/coffee -p -c src/js/#{name}.coffee #{append ? '>>' : '>'} lib/#{name}.js`
+def compile_coffee
+  `node_modules/.bin/coffee -o lib -c src/js`
 end
 
 task :build do
-  compile_coffee('zoom')
-  %w(background util options popup).each { |f| compile_coffee f }
+  compile_coffee
   puts 'compile done'
 end
 
