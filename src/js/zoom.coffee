@@ -1,3 +1,4 @@
+window.zoomTextOnlyLoaded = true
 totalRatio = 1
 ZOOM_LEVEL_KEY = 'zoomLevel'
 IGNORED_TAGS = /SCRIPT|NOSCRIPT|LINK|BR|EMBED|IFRAME|IMG|VIDEO|CANVAS|STYLE/
