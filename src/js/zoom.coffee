@@ -1,3 +1,4 @@
+'use strict'
 window.zoomTextOnlyLoaded = true
 totalRatio = 1
 ZOOM_LEVEL_KEY = 'zoomLevel'
@@ -18,11 +19,11 @@ addImportantStyle = (el, name, value) ->
 changeFont = (ratioDiff, notification = true) ->
   start = (new Date()).getTime() # uncomment to benchmark
   changeFontSizeCalls = []
-  prevRatio           = totalRatio
-  totalRatio          += ratioDiff
-  totalRatio          = Math.round(totalRatio * 10) / 10
-  multiplier          = totalRatio / prevRatio
-  relevantElements    = $('body, body *')
+  prevRatio = totalRatio
+  totalRatio += ratioDiff
+  totalRatio = Math.round(totalRatio * 10) / 10
+  multiplier = totalRatio / prevRatio
+  relevantElements = document.querySelectorAll('body, body *')
 
   if notification
     setTimeout ->
@@ -32,32 +33,35 @@ changeFont = (ratioDiff, notification = true) ->
         text: "Level #{(totalRatio * 100).toFixed()}%"
 
   if totalRatio == 1
-    relevantElements.css
-      'font-size':   ''
-      'line-height': ''
-    relevantElements.removeClass 'noTransition'
+    for el in relevantElements
+      el.classList.remove('noTransition')
+      el.style['font-size'] = null
+      el.style['line-height'] = null
+
     return util.putInLocalStorage(ZOOM_LEVEL_KEY, false)
 
   util.putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
 
   # transitions screw up font size measuring
-  relevantElements.addClass('noTransition') if prevRatio == 1
+  if prevRatio == 1
+    for el in relevantElements
+      el.classList.add('noTransition')
 
-  for element in relevantElements
-    ((el) ->
-      tagName = el.tagName
-      return if tagName.match(IGNORED_TAGS)
+  [].forEach.call relevantElements, (el) ->
+    tagName = el.tagName
+    return if tagName.match(IGNORED_TAGS)
 
-      if !util.isBlank(el.innerText) || (tagName == 'TEXTAREA')
-        currentLh  = getComputedStyle(el).lineHeight
-        lineHeight = multiplyByRatio(currentLh, multiplier) if currentLh.indexOf('px') != -1
+    computedStyle = getComputedStyle(el)
 
-      fontSize = multiplyByRatio(getComputedStyle(el).fontSize, multiplier)
+    if !util.isBlank(el.innerText) || (tagName == 'TEXTAREA')
+      currentLh = computedStyle.lineHeight
+      lineHeight = multiplyByRatio(currentLh, multiplier) if currentLh.indexOf('px') != -1
 
-      changeFontSizeCalls.push ->
-        addImportantStyle(el, 'font-size', fontSize)
-        addImportantStyle(el, 'line-height', lineHeight) if lineHeight?
-    )(element)
+    fontSize = multiplyByRatio(computedStyle.fontSize, multiplier)
+
+    changeFontSizeCalls.push ->
+      addImportantStyle(el, 'font-size', fontSize)
+      addImportantStyle(el, 'line-height', lineHeight) unless lineHeight == undefined
 
   for call in changeFontSizeCalls
     call()
