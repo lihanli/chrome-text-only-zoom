@@ -3,6 +3,6 @@
         "name": "Jordan Boesch, Jason Feriante"
     },
     "name": "gritter",
-    "version": "1.7.6",
-    "main": ["./js/jsquery.gritter.min.js"]
+    "version": "1.8.1",
+    "main": ["./js/jquery.gritter.min.js"]
 }

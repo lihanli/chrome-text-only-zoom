@@ -19,7 +19,7 @@
       "matches": ["<all_urls>"],
       "css": ["lib/zoom.css"],
       "js": [
-        "bower_components/jquery/jquery.js",
+        "bower_components/jquery/dist/jquery.js",
         "bower_components/gritter/js/jquery.gritter.js",
         "bower_components/mousetrap/mousetrap.js",
         "lib/util.js",
