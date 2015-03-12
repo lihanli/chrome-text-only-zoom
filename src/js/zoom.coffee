@@ -16,7 +16,7 @@ addImportantStyle = (el, name, value) ->
   el.style.cssText += "#{name}: #{value} !important;"
 
 changeFont = (ratioDiff, notification = true) ->
-  #start = (new Date()).getTime() # uncomment to benchmark
+  start = (new Date()).getTime() # uncomment to benchmark
   changeFontSizeCalls = []
   prevRatio           = totalRatio
   totalRatio          += ratioDiff
@@ -25,10 +25,11 @@ changeFont = (ratioDiff, notification = true) ->
   relevantElements    = $('body, body *')
 
   if notification
-    $('.gritter-close').click()
-    $.gritter.add
-      title: "Text Zoom"
-      text: "Level #{(totalRatio * 100).toFixed()}%"
+    setTimeout ->
+      $('.gritter-close').click()
+      $.gritter.add
+        title: "Text Zoom"
+        text: "Level #{(totalRatio * 100).toFixed()}%"
 
   if totalRatio == 1
     relevantElements.css
@@ -61,7 +62,7 @@ changeFont = (ratioDiff, notification = true) ->
   for call in changeFontSizeCalls
     call()
 
-  #console.log (new Date()).getTime() - start # uncomment to benchmark
+  console.log (new Date()).getTime() - start # uncomment to benchmark
 
 getKeyFromBackground = (keyName, keyFunction) ->
   chrome.extension.sendMessage key: keyName, (res) ->
