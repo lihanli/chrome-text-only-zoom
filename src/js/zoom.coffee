@@ -2,7 +2,13 @@
 window.zoomTextOnlyLoaded = true
 totalRatio = 1
 ZOOM_LEVEL_KEY = 'zoomLevel'
+TRANSITION_ALLOWED_SITES = ['google.com']
 IGNORED_TAGS = /SCRIPT|NOSCRIPT|LINK|BR|EMBED|IFRAME|IMG|VIDEO|CANVAS|STYLE/
+TRANSITION_ALLOWED = do ->
+  hostname = window.location.hostname
+
+  for site in TRANSITION_ALLOWED_SITES
+    return true if hostname.endsWith(site)
 
 $.extend $.gritter.options,
   position: "bottom-left" # defaults to 'top-right' but can be 'bottom-left', 'bottom-right', 'top-left', 'top-right' (added in 1.7.1)
@@ -34,7 +40,7 @@ changeFont = (ratioDiff, notification = true) ->
 
   if totalRatio == 1
     for el in relevantElements
-      el.classList.remove('noTransition')
+      el.classList.remove('noTransition') unless TRANSITION_ALLOWED
       el.style['font-size'] = null
       el.style['line-height'] = null
 
@@ -43,7 +49,7 @@ changeFont = (ratioDiff, notification = true) ->
   util.putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
 
   # transitions screw up font size measuring
-  if prevRatio == 1
+  if prevRatio == 1 && !TRANSITION_ALLOWED
     for el in relevantElements
       el.classList.add('noTransition')
 
