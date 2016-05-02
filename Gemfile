@@ -7,6 +7,6 @@ gem "turn"
 gem "pry"
 gem "capybara", "2.1.0"
 gem 'selenium-webdriver', '2.45.0'
-gem 'wist'
+gem 'wist', '0.4.1'
 gem "rake"
 gem 'tconsole'

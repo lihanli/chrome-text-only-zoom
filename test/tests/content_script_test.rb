@@ -9,6 +9,7 @@ class ContentScriptTest < CapybaraTestCase
 
   def change_font(up = true)
     key = up ? '=' : '-'
+    sleep(1)
     page.execute_script("Mousetrap.trigger('alt+#{key}')")
   end
 
@@ -24,7 +25,7 @@ class ContentScriptTest < CapybaraTestCase
     end
     assert_equal '10px', get_js("$('#no_text').css('line-height')")
 
-    verify_gritter_text(notification ? "#{size * 10}%" : notification)
+    verify_notification_text(notification ? "#{size * 10}%" : notification)
   end
 
   def verify_no_style(selector)
@@ -33,11 +34,13 @@ class ContentScriptTest < CapybaraTestCase
     assert_equal false, has_class?(find(selector), 'noTransition')
   end
 
-  def verify_gritter_text(text)
+  def verify_notification_text(text)
+    selector = '#notie-alert-text'
+
     if text
-      assert all('.gritter-without-image p').last.text.include?(text)
+      assert_text_include(text, find(selector))
     else
-      assert_equal false, page.has_css?('.gritter-item')
+      assert_has_no_css(selector)
     end
   end
 
@@ -45,7 +48,7 @@ class ContentScriptTest < CapybaraTestCase
     @all_elements.each do |element|
       verify_no_style element
     end
-    verify_gritter_text(notification ? '100%' : notification)
+    verify_notification_text(notification ? '100%' : notification)
   end
 
   def test_zoom
