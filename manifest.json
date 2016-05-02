@@ -17,9 +17,12 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "css": ["lib/zoom.css"],
+      "css": [
+        "bower_components/alertify.js/dist/css/alertify.css",
+        "lib/zoom.css"
+      ],
       "js": [
-        "bower_components/notie/dist/notie.js",
+        "bower_components/alertify.js/dist/js/alertify.js",
         "bower_components/mousetrap/mousetrap.js",
         "lib/util.js",
         "lib/zoom.js"

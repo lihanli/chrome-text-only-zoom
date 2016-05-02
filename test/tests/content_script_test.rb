@@ -9,7 +9,6 @@ class ContentScriptTest < CapybaraTestCase
 
   def change_font(up = true)
     key = up ? '=' : '-'
-    sleep(1)
     page.execute_script("Mousetrap.trigger('alt+#{key}')")
   end
 
@@ -35,10 +34,10 @@ class ContentScriptTest < CapybaraTestCase
   end
 
   def verify_notification_text(text)
-    selector = '#notie-alert-text'
+    selector = '.alertify-logs'
 
     if text
-      assert_text_include(text, find(selector))
+      assert_text_include(text, all(selector).last)
     else
       assert_has_no_css(selector)
     end

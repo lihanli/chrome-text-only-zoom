@@ -27,7 +27,7 @@ changeFont = (ratioDiff, notification = true) ->
 
   if notification
     setTimeout ->
-      notie.alert(4, "Text Zoom #{(totalRatio * 100).toFixed()}%", 2)
+      alertify.log("Text Zoom #{(totalRatio * 100).toFixed()}%")
 
   if totalRatio == 1
     for el in relevantElements
