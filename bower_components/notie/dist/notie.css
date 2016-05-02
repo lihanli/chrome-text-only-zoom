@@ -1,7 +1,3 @@
-.noTransition {
-  transition: all 0s ease 0s !important;
-}
-
 .notie-transition {
   -moz-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
@@ -17,7 +13,7 @@
   background-color: #E1715B; }
 
 .notie-background-info {
-  background-color: #eee !important; }
+  background-color: #4D82D6; }
 
 #notie-alert-outer, #notie-confirm-outer, #notie-input-outer, #notie-select-outer {
   position: fixed;
@@ -48,7 +44,7 @@
   margin: 0 auto; }
 
 #notie-alert-text {
-  color: #000 !important; }
+  color: #FFFFFF; }
 
 #notie-confirm-outer {
   cursor: default; }

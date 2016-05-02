@@ -10,12 +10,6 @@ TRANSITION_ALLOWED = do ->
   for site in TRANSITION_ALLOWED_SITES
     return true if hostname.endsWith(site)
 
-$.extend $.gritter.options,
-  position: "bottom-left" # defaults to 'top-right' but can be 'bottom-left', 'bottom-right', 'top-left', 'top-right' (added in 1.7.1)
-  fade_in_speed: 0 # how fast notifications fade in (string or int)
-  fade_out_speed: 0 # how fast the notices fade out
-  time: 3000 # hang on the screen for...
-
 multiplyByRatio = (value, multiplier) ->
   (parseFloat(value) * multiplier) + 'px'
 
@@ -33,10 +27,7 @@ changeFont = (ratioDiff, notification = true) ->
 
   if notification
     setTimeout ->
-      $('.gritter-close').click()
-      $.gritter.add
-        title: "Text Zoom"
-        text: "Level #{(totalRatio * 100).toFixed()}%"
+      notie.alert(4, "Text Zoom #{(totalRatio * 100).toFixed()}%", 2)
 
   if totalRatio == 1
     for el in relevantElements

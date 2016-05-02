@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "jquery": "2.1.3",
+    "notie": "3.2.0",
     "gritter": "latest",
     "mousetrap": "latest",
     "underscore": "latest",

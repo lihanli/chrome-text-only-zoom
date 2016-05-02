@@ -1,0 +1,38 @@
+{
+  "name": "notie",
+  "description": "notie - a clean and simple notification suite for javascript, with no dependencies",
+  "main": [
+    "dist/notie.js",
+    "dist/notie.css"
+  ],
+  "moduleType": [],
+  "authors": [
+    "Jared Reich"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "alert",
+    "notification",
+    "growl",
+    "message"
+  ],
+  "homepage": "https://github.com/jaredreich/notie",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "3.2.0",
+  "_release": "3.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.2.0",
+    "commit": "7e601e781e624506adcdf56aaea70e6651f93dbb"
+  },
+  "_source": "https://github.com/jaredreich/notie.js.git",
+  "_target": "3.2.0",
+  "_originalSource": "notie"
+}
