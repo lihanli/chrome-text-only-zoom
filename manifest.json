@@ -18,7 +18,6 @@
     {
       "matches": ["<all_urls>"],
       "css": [
-        "bower_components/alertify.js/dist/css/alertify.css",
         "lib/zoom.css"
       ],
       "js": [
