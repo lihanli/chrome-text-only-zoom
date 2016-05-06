@@ -3,10 +3,7 @@ div,
 input {
 	font-size: 10px !important;
 	line-height: 10px !important;
-	transition: width 2s;
-	-moz-transition: width 2s;
-	-webkit-transition: width 2s;
-	-o-transition: width 2s;
+	transition: all 2s ease;
 }
 .large_lh {
 	line-height: 12px !important;

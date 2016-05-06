@@ -2,13 +2,7 @@
 window.zoomTextOnlyLoaded = true
 totalRatio = 1
 ZOOM_LEVEL_KEY = 'zoomLevel'
-TRANSITION_ALLOWED_SITES = ['google.com']
 IGNORED_TAGS = /SCRIPT|NOSCRIPT|LINK|BR|EMBED|IFRAME|IMG|VIDEO|CANVAS|STYLE/
-TRANSITION_ALLOWED = do ->
-  hostname = window.location.hostname
-
-  for site in TRANSITION_ALLOWED_SITES
-    return true if hostname.endsWith(site)
 
 multiplyByRatio = (value, multiplier) ->
   (parseFloat(value) * multiplier) + 'px'
@@ -31,18 +25,13 @@ changeFont = (ratioDiff, notification = true) ->
 
   if totalRatio == 1
     for el in relevantElements
-      el.classList.remove('noTransition') unless TRANSITION_ALLOWED
+      el.style['transition'] = null
       el.style['font-size'] = null
       el.style['line-height'] = null
 
     return util.putInLocalStorage(ZOOM_LEVEL_KEY, false)
 
   util.putInLocalStorage ZOOM_LEVEL_KEY, (totalRatio - 1)
-
-  # transitions screw up font size measuring
-  if prevRatio == 1 && !TRANSITION_ALLOWED
-    for el in relevantElements
-      el.classList.add('noTransition')
 
   [].forEach.call relevantElements, (el) ->
     tagName = el.tagName
@@ -57,6 +46,7 @@ changeFont = (ratioDiff, notification = true) ->
     fontSize = multiplyByRatio(computedStyle.fontSize, multiplier)
 
     changeFontSizeCalls.push ->
+      el.style['transition'] = 'font 0s'
       addImportantStyle(el, 'font-size', fontSize)
       addImportantStyle(el, 'line-height', lineHeight) unless lineHeight == undefined
 
